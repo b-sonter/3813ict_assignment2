@@ -27,7 +27,7 @@ export class GroupService {
     //delete specified group
   }
 
-  
+
   getGroups(data){
   //get all groups for specified user
   }

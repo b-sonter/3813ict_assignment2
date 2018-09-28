@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
         if(result['success']) {
           this.router.navigate(['/home']);
           sessionStorage.setItem('user',this.user.username);
+          sessionStorage.setItem('perms', result.user.permissions);
         } else {
           alert('Wrong username password');
         }
@@ -42,5 +43,6 @@ export class LoginComponent implements OnInit {
   		alert('enter user name and password');
   	}
   }
+
 
 }

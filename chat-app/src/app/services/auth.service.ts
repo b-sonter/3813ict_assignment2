@@ -8,7 +8,7 @@ import { User } from '../services/user.model';
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   validateLogin(user: User){
@@ -17,6 +17,7 @@ export class AuthService {
 			password : user.password
 		});
 	}
+
 
 
 }

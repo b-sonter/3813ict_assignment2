@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit {
     } else {
       let user = sessionStorage.getItem('user');
       this.user = user;
+      let perms = sessionStorage.getItem('perms');
+      this.perms = perms;
     }
   }
 

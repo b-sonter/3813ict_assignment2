@@ -14,8 +14,6 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost/chatDb';
 
-const User = require('./model/user');
-
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended : false}))
 
@@ -63,6 +61,16 @@ app.post('/api/login', (req, res) => {
     });
 })
 
+//add new user
+app.post('/api/newuser', function(req, res){
+  let writer = require('./add.js')(MongoClient, url);
+  let newUser = {
+    "username": req.body.username,
+    "password": req.body.password,
+    "permissions": req.body.permissions
+  }
+  writer.addUser(newUser, res);
+});
 
 
 
