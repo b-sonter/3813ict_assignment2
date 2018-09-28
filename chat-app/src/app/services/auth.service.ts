@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-//import { User } from '../services/user.model';
+import { User } from '../services/user.model';
 
 
 @Injectable({
@@ -8,12 +8,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AuthService {
 
-  public username;
-	public password;
-
-  constructor(private http: HttpClient) {
-    this.username = '';
-		this.password = '';
+  constructor(private http: HttpClient) { 
   }
 
   validateLogin(user: User){
