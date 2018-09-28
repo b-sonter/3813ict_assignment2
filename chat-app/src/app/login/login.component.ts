@@ -19,6 +19,9 @@ export class LoginComponent implements OnInit {
    }
 
   ngOnInit() {
+    if(sessionStorage.getItem('user') !== null){
+      this.router.navigate(['/home']);
+    }
   }
 
   validateLogin() {
@@ -26,7 +29,8 @@ export class LoginComponent implements OnInit {
   		this.Auth.validateLogin(this.user).subscribe(result => {
         console.log('result is ', result);
         if(result['success']) {
-          this.router.navigate(['/dash']);
+          this.router.navigate(['/home']);
+          sessionStorage.setItem('user',this.user.username);
         } else {
           alert('Wrong username password');
         }
