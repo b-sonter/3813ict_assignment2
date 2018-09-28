@@ -17,7 +17,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 //Routes
-app.route('/api/login').get(function(req,res){
+/*app.route('/api/login').get(function(req,res){
   //create route?
 });
 
@@ -26,10 +26,10 @@ app.post('/api/login', (req, res) => {
         if(err) throw err;
         console.log('connected successfully, username is ',req.body.username,' password is ',req.body.password);
     });
-})
+}) */
 
 app.post('/api/login', (req, res) => {
-  //res.send('Hello World!')
+  res.send('Hello World!')
 
 	mongoose.connect(url, function(err){
 		if(err) throw err;
@@ -71,4 +71,4 @@ app.post('/api/login', (req, res) => {
 	});
 })*/
 
-app.listen(4200, () => console.log('Chat server running on port 4200!'))
+app.listen(3000, () => console.log('Chat server running on port 3000!'))
