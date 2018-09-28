@@ -25,7 +25,7 @@ export class LoginComponent implements OnInit {
   	if(this.user.username && this.user.password) {
   		this.Auth.validateLogin(this.user).subscribe(result => {
         console.log('result is ', result);
-        if(result['status'] == 'success') {
+        if(result['success']) {
           this.router.navigate(['/dash']);
         } else {
           alert('Wrong username password');

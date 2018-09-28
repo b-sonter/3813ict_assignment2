@@ -1,7 +1,17 @@
+///////////////////////////////////////////////////////////////////////////////
+// Main server javascript file
+//
+//
+//
+//
+//
+//
+///////////////////////////////////////////////////////////////////////////////
+
 const express = require('express')
 const bodyParser = require('body-parser')
 const app = express()
-const mongoose = require('mongoose');
+const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost/chatDb';
 
 const User = require('./model/user');
@@ -16,59 +26,42 @@ var corsOptions = {
 }
 app.use(cors(corsOptions));
 
-//Routes
-/*app.route('/api/login').get(function(req,res){
-  //create route?
-});
-
+//Read from database
 app.post('/api/login', (req, res) => {
-    mongoose.connect(url, function(err){
-        if(err) throw err;
-        console.log('connected successfully, username is ',req.body.username,' password is ',req.body.password);
+    MongoClient.connect(url, function(err, db){
+      if(err) throw err;
+
+      //search for user in the database based on input to login
+      let dbo = db.db('chatDb');
+      let query = {"username": req.body.username};
+      dbo.collection('user').findOne(query, function(err, data){
+        console.log(data);
+        let response = {};
+        if(data == null){
+          // Username doesn't exist
+          console.log("username doesn't eixst");
+          response.success = false;
+        } else {
+          //returns confirmation that user exists and password matches for that user
+          console.log("username exists");
+          if(data.password == req.body.password){
+            console.log("passwords match");
+            response.success = true;
+            response.user = data;
+          }
+          else{
+            // returns when the password doesnt match for the user
+            console.log("passwords do not match");
+            response.success = false;
+          }
+        }
+        //send user data from database
+        res.send(response);
+
+        db.close();
+      })
     });
-}) */
-
-app.post('/api/login', (req, res) => {
-  res.send('Hello World!')
-
-	mongoose.connect(url, function(err){
-		if(err) throw err;
-		User.find({
-			username : req.body.username, password : req.body.password
-		}, function(err, user){
-			if(err) throw err;
-			if(user.length === 1){
-				return res.status(200).json({
-					status: 'success',
-					data: user
-				})
-			} else {
-				return res.status(200).json({
-					status: 'fail',
-					message: 'Login Failed'
-				})
-			}
-
-		})
-	});
 })
 
-/*app.post('/api/user/create', (req, res) => {
-	mongoose.connect(url, function(err){
-		if(err) throw err;
-		const user = new User({
-			name: req.body.name,
-			username: req.body.username,
-			password: req.body.password
-		})
-		user.save((err, res) => {
-			if(err) throw err;
-			return res.status(200).json({
-				status: 'success',
-				data: res
-			})
-		})
-	});
-})*/
-
+//lsiten to server
 app.listen(3000, () => console.log('Chat server running on port 3000!'))
