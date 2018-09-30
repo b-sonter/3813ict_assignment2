@@ -33,7 +33,7 @@ app.post('/api/login', (req, res) => {
       let dbo = db.db('chatDb');
       let query = {"username": req.body.username};
       dbo.collection('user').findOne(query, function(err, data){
-        console.log(data);
+        //console.log(data);
         let response = {};
         if(data == null){
           // Username doesn't exist
@@ -41,7 +41,7 @@ app.post('/api/login', (req, res) => {
           response.success = false;
         } else {
           //returns confirmation that user exists and password matches for that user
-          console.log("username exists");
+          //console.log("username exists");
           if(data.password == req.body.password){
             console.log("passwords match");
             response.success = true;
@@ -49,7 +49,7 @@ app.post('/api/login', (req, res) => {
           }
           else{
             // returns when the password doesnt match for the user
-            console.log("passwords do not match");
+            //console.log("passwords do not match");
             response.success = false;
           }
         }
@@ -62,6 +62,53 @@ app.post('/api/login', (req, res) => {
 })
 
 //add new user
+app.post('/api/newuser', (req, res) => {
+    MongoClient.connect(url, function(err, db){
+      if(err) throw err;
+
+      //search for user in the database based on input to login
+      let dbo = db.db('chatDb');
+      let query = {"username": req.body.username};
+      dbo.collection('user').findOne(query, function(err, data){
+        //console.log(data);
+        let response = {};
+        if(data == null){
+          // Username doesn't exist
+          response.success = true;
+
+        } else {
+          //returns confirmation that user exists and password matches for that user
+          response.success = false;
+        }
+        //send user data from database
+        res.send(response);
+
+        db.close();
+      })
+    });
+})
+
+//write new user to user collection
+app.post('/api/newuserwrite', (req, res) => {
+    MongoClient.connect(url, function(err, db){
+      let newUser = {
+        "username": req.body.username,
+        "password": req.body.password,
+        "permissions": req.permissions
+      }
+
+      dbo.collection('user').insertOne(newUser, function(err, data){
+        if(err) throw err;
+        console.log(data);
+        res.send(true)
+      })
+    });
+})
+
+
+
+
+
 
 
 

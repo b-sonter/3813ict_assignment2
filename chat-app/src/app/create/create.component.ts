@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../services/user.model';
+import { UserService } from '../services/user.service';
+
 
 @Component({
   selector: 'app-create',
@@ -13,7 +15,9 @@ export class CreateComponent implements OnInit {
   public permslog;
   public user : User;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private _userService: UserService) {
+    this.user = new User();
+   }
 
   ngOnInit() {
     if(sessionStorage.getItem('userlog') === null){
@@ -44,10 +48,27 @@ export class CreateComponent implements OnInit {
     permissions: new_permissions
   }
   console.log(newuser)
-  
-  }
 
-  deleteUser(){
+  this._userService.getUsers(this.user).subscribe(result => {
+    console.log('result is ', result);
+    if(result['success']){
+      this._userService.addNewUser(newuser).subscribe(
+        data => {
+          return true;
+        },
+        error => {
+          console.log(error);
+        }
+      )
+    } else {
+      alert('User already exists');
+    }
+
+});
+}
+
+  deleteUser(goodbye){
     //delete user from database
+    
   }
 }

@@ -9,7 +9,7 @@ module.exports = function(MongoClient, url){
 
       //add new user
       dbo.collection("user").insertOne(user, function(err, result) {
-        if(err) thro err;
+        if(err) throw err;
 
         console.log("Added new User: " + user.username);
         res.send(true);
@@ -19,5 +19,5 @@ module.exports = function(MongoClient, url){
   }
 
   return this;
-  
+
 }
