@@ -1,22 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { GroupService } from '../services/group.service';
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css']
 })
-export class HomeComponent implements OnInit {
+export class CreateComponent implements OnInit {
+
   public user;
   public perms;
-  public selectedGroup;
-  public selectedChannel;
-  public groups = [];
-  public channels = [];
-  public newGroupName:String
 
-  constructor(private router: Router, private _groupService:GroupService) { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     if(sessionStorage.getItem('user') === null){
@@ -30,17 +25,20 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
-
   logout(){
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 
-  goCreate(){
-    this.router.navigate(['/create']);
+  goHome(){
+    this.router.navigate(['/home']);
   }
 
+  addNewUser(){
+    //add new user to database
+  }
 
-
+  deleteUser(){
+    //delete user from database
+  }
 }

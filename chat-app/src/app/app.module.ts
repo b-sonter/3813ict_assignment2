@@ -9,6 +9,7 @@ import { ChannelsComponent } from './channels/channels.component';
 import { ChatComponent } from './chat/chat.component';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
+import { CreateComponent } from './create/create.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { LoginComponent } from './login/login.component';
     ChannelsComponent,
     ChatComponent,
     HomeComponent,
-    LoginComponent
+    LoginComponent,
+    CreateComponent
   ],
   imports: [
     BrowserModule,

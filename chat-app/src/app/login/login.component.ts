@@ -29,9 +29,9 @@ export class LoginComponent implements OnInit {
   		this.Auth.validateLogin(this.user).subscribe(result => {
         console.log('result is ', result);
         if(result['success']) {
-          this.router.navigate(['/home']);
           sessionStorage.setItem('user',this.user.username);
           sessionStorage.setItem('perms', result.user.permissions);
+          this.router.navigate(['/home']);
         } else {
           alert('Wrong username password');
         }
