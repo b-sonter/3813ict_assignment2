@@ -8,8 +8,8 @@ import { GroupService } from '../services/group.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  public user;
-  public perms;
+  public userlog;
+  public permslog;
   public selectedGroup;
   public selectedChannel;
   public groups = [];
@@ -19,14 +19,14 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private _groupService:GroupService) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem('user') === null){
+    if(sessionStorage.getItem('userlog') === null){
       // User has not logged in, reroute to login
       this.router.navigate(['/login']);
     } else {
-      let user = sessionStorage.getItem('user');
-      this.user = user;
-      let perms = sessionStorage.getItem('perms');
-      this.perms = perms;
+      let userlog = sessionStorage.getItem('userlog');
+      this.userlog = userlog;
+      let permslog = sessionStorage.getItem('permslog');
+      this.permslog = permslog;
     }
   }
 

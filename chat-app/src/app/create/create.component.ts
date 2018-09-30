@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../services/user.model';
 
 @Component({
   selector: 'app-create',
@@ -8,20 +9,21 @@ import { Router } from '@angular/router';
 })
 export class CreateComponent implements OnInit {
 
-  public user;
-  public perms;
+  public userlog;
+  public permslog;
+  public user : User;
 
   constructor(private router: Router) { }
 
   ngOnInit() {
-    if(sessionStorage.getItem('user') === null){
+    if(sessionStorage.getItem('userlog') === null){
       // User has not logged in, reroute to login
       this.router.navigate(['/login']);
     } else {
-      let user = sessionStorage.getItem('user');
-      this.user = user;
-      let perms = sessionStorage.getItem('perms');
-      this.perms = perms;
+      let userlog = sessionStorage.getItem('userlog');
+      this.userlog = userlog;
+      let permslog = sessionStorage.getItem('permslog');
+      this.permslog = permslog;
     }
   }
 
@@ -34,8 +36,15 @@ export class CreateComponent implements OnInit {
     this.router.navigate(['/home']);
   }
 
-  addNewUser(){
+  addNewUser(new_username, new_password, new_permissions){
     //add new user to database
+    let newuser = {
+    username: new_username,
+    password: new_password,
+    permissions: new_permissions
+  }
+  console.log(newuser)
+  
   }
 
   deleteUser(){

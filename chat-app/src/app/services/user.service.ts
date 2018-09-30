@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { User } from '../services/user.model';
 import { Observable, of } from 'rxjs';
 
 @Injectable({
@@ -6,5 +8,15 @@ import { Observable, of } from 'rxjs';
 })
 export class UserService {
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
+
+  getUsers(){
+  }
+
+  addNewUser(){
+
+  }
+
+
+
 }

@@ -62,15 +62,18 @@ app.post('/api/login', (req, res) => {
 })
 
 //add new user
-app.post('/api/newuser', function(req, res){
-  let writer = require('./add.js')(MongoClient, url);
-  let newUser = {
-    "username": req.body.username,
-    "password": req.body.password,
-    "permissions": req.body.permissions
-  }
-  writer.addUser(newUser, res);
-});
+
+
+
+// app.post('/api/newuser', function(req, res){
+//   let writer = require('./add.js')(MongoClient, url);
+//   let newUser = {
+//     "username": req.body.username,
+//     "password": req.body.password,
+//     "permissions": req.body.permissions
+//   }
+//   writer.addUser(newUser, res);
+// });
 
 
 

@@ -1,7 +1,7 @@
 <!-- Nav Bar -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <!-- Branding on left side-->
-  <a class="navbar-brand" routerLink="#">  Welcome <strong>{{user}}</strong></a>
+  <a class="navbar-brand" routerLink="#">  Welcome <strong>{{userlog}}</strong></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -12,7 +12,7 @@
       <li class="nav-item">
         <a class="nav-link" (click)="goHome()" routerLink="">Home</a>
       </li>
-      <li *ngIf="perms == 2" class="nav-item active">
+      <li *ngIf="permslog == 2" class="nav-item active">
         <a class="nav-link" routerLink="#" >Create</a>
       </li>
       <li class="nav-item">
@@ -34,33 +34,29 @@
     <h3> Add new user </h3>
     <div class="form-group">
       <label for="exampleInputEmail1">Username</label>
-      <input [(ngModel)]="user.username" type="username"  class="form-control" id="username" name="username" placeholder="Enter Username">
+      <input [(ngModel)]="new_username" type="username"  class="form-control" id="username" name="username" placeholder="Enter Username">
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
-      <input [(ngModel)]="user.password" name="password" type="password"  class="form-control" id="password" placeholder="Enter Password">
+      <input [(ngModel)]="new_password" name="password" type="password"  class="form-control" id="password" placeholder="Enter Password">
     </div>
     <div class="form-group">
-    <label for="exampleSelect1">User Permissions</label>
-    <select class="form-control" id="exampleSelect1">
-      <option>General User</option>
-      <option>Group Admin</option>
-      <option>Super Admin</option>
-    </select>
-  </div>
-    <button (click)="addNewUser();" class="btn btn-secondary">Add User</button>
+      <label for="exampleInputPermission1">Permissions</label>
+      <input [(ngModel)]="new_permissions" name="permissions" type="permissions"  class="form-control" id="permissions" placeholder="0, 1 or 2">
+    </div>
+    <button (click)="addNewUser(new_username, new_password, new_permissions)" class="btn btn-secondary">Add User</button>
 
 </form>
 <div id="space"></div>
 
 <form>
     <h3> Delete User </h3>
-    <div class="form-group">
+    <!-- <div class="form-group">
       <label for="exampleInputEmail1">Username</label>
       <input [(ngModel)]="user.username" type="username"  class="form-control" id="deleteUsername" name="username" placeholder="Enter Username">
-    </div>
+    </div> -->
 
-    <button (click)="deleteUser();" class="btn btn-secondary">Delete User</button>
+    <button (click)="deleteUser()" class="btn btn-secondary">Delete User</button>
 
 </form>
 
