@@ -3,13 +3,12 @@ import { Router } from '@angular/router';
 import { User } from '../services/user.model';
 import { UserService } from '../services/user.service';
 
-
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-delete',
+  templateUrl: './delete.component.html',
+  styleUrls: ['./delete.component.css']
 })
-export class CreateComponent implements OnInit {
+export class DeleteComponent implements OnInit {
 
   public userlog;
   public permslog;
@@ -17,7 +16,7 @@ export class CreateComponent implements OnInit {
 
   constructor(private router: Router, private _userService: UserService) {
     this.user = new User();
-   }
+  }
 
   ngOnInit() {
     if(sessionStorage.getItem('userlog') === null){
@@ -36,27 +35,20 @@ export class CreateComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  goDelete(){
-    this.router.navigate(['/delete']);
-  }
-
   goHome(){
     this.router.navigate(['/home']);
   }
 
-  addNewUser(new_username, new_password, new_permissions){
-    //add new user to database
-    let newuser = {
-    username: new_username,
-    password: new_password,
-    permissions: new_permissions
+  goCreate(){
+    this.router.navigate(['/create']);
   }
-  console.log(newuser)
 
-  this._userService.getUsers(this.user).subscribe(result => {
+  deleteUser(username){
+    //delete user from database
+    this._userService.checkToDelete(username).subscribe(result => {
     console.log('result is ', result);
     if(result['success']){
-      this._userService.addNewUser(newuser).subscribe(
+      this._userService.userDelete(username).subscribe(
         data => {
           return true;
         },
@@ -65,11 +57,10 @@ export class CreateComponent implements OnInit {
         }
       )
     } else {
-      alert('User already exists');
+      alert("Can't delete a user that doesn't exist");
     }
 
 });
-}
-
+  }
 
 }

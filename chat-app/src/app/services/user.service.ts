@@ -14,21 +14,27 @@ export class UserService {
 
   constructor(private http: HttpClient) { }
 
-  getUsers(user: Username){
+  getUsers(user: User){
     return this.http.post('http://localhost:3000/api/newuser',{
       username : user.username,
       password : user.password,
       permissions: user.permissions
       });
-
   }
 
   addNewUser(newuser){
     let body = JSON.stringify(newuser);
-    console.log(body);
     return this.http.post('http://localhost:3000/api/newuserwrite', body)
   }
 
+  checkToDelete(user: User){
+    return this.http.post('http://localhost:3000/api/checkfordelete',{
+      username : user.username
+      });
+  }
 
+  userDelete(goodbye){
+    return this.http.delete('http://localhost:3000/api/deleteuser', + user._id)
+  }
 
 }

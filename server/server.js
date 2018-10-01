@@ -61,7 +61,7 @@ app.post('/api/login', (req, res) => {
     });
 })
 
-//add new user
+//add new user check
 app.post('/api/newuser', (req, res) => {
     MongoClient.connect(url, function(err, db){
       if(err) throw err;
@@ -70,14 +70,14 @@ app.post('/api/newuser', (req, res) => {
       let dbo = db.db('chatDb');
       let query = {"username": req.body.username};
       dbo.collection('user').findOne(query, function(err, data){
-        //console.log(data);
+
         let response = {};
         if(data == null){
           // Username doesn't exist
           response.success = true;
 
         } else {
-          //returns confirmation that user exists and password matches for that user
+          //Username already exists
           response.success = false;
         }
         //send user data from database
@@ -96,33 +96,61 @@ app.post('/api/newuserwrite', (req, res) => {
         "password": req.body.password,
         "permissions": req.permissions
       }
-
+      let dbo = db.db('chatDb');
       dbo.collection('user').insertOne(newUser, function(err, data){
         if(err) throw err;
-        console.log(data);
         res.send(true)
       })
     });
-})
+    console.log("New user: " + req.body.username);
+    db.close();
+});
 
 
+//check if user can be deleted
+app.post('/api/checkfordelete', (req, res) => {
+  MongoClient.connect(url, function(err, db){
+    if(err) throw err;
 
+    let dbo = db.db('chatDb');
+    let query = {"username": req.body.username};
 
+    dbo.collection('user').findOne(query, function(err, data){
+      let response = {};
+      if(data == null){
+        response.success = false;
+        console.log("Null");
+      } else {
+        response.success = true;
+        console.log("Username can be deleted");
+      }
+      res.send(response);
 
+      db.close();
+    })
+  })
+});
 
+//delete user from database
+app.post('/api/deleteuser', (req, res) => {
+  MongoClient.connect(url, function(err, db){
+    if(err) throw err;
 
+    let dbo = db.db('chatDb');
+    let ObjectID = require('mongodb').ObjectID;
 
-// app.post('/api/newuser', function(req, res){
-//   let writer = require('./add.js')(MongoClient, url);
-//   let newUser = {
-//     "username": req.body.username,
-//     "password": req.body.password,
-//     "permissions": req.body.permissions
-//   }
-//   writer.addUser(newUser, res);
-// });
+    let query = {_id: ObjectID(id)};
+    console.log(query._id)
+    dbo.collection('user').deleteOne(query, function(err, data){
+      if(err) throw err;
+      res.send(true)
+    });
 
+    db.close();
+  })
+  console.log("Deleted user: " + req.body.username);
+});
 
 
 //lsiten to server
-app.listen(3000, () => console.log('Chat server running on port 3000!'))
+app.listen(3000, () => console.log('Chat server running on port 3000!'));

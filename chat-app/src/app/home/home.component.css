@@ -4,3 +4,34 @@ body{
   margin-bottom: 2em;
   margin-top: 1em;
 }
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#groupcolumn{
+  float: left;
+  width: 18%;
+  background-color: #CCE5FE;
+  height: 35em;
+}
+
+#chatcolumn{
+  width: 18%;
+  background-color: #CCE5FE;
+  height: 35em;
+}
+
+#chatroom{
+  width: 50%;
+  background-color: #CCE5FE;
+  height: 35em;
+}
+
+#chatpeeps{
+  width: 14%;
+  background-color: #CCE5FE;
+  height: 35em;
+}

@@ -41,6 +41,9 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/create']);
   }
 
+  goDelete(){
+    this.router.navigate(['/delete']);
+  }
 
 
 }
