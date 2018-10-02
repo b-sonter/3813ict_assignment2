@@ -14,6 +14,29 @@ The components within this application consisted of the following;
 * home
 * login
 
+### Server Summary
+The server files are spread mainly between 4 main files:
+* server.js
+* socket.js
+* listen.js
+* routes.js
+
+** Server.js **
+This file is the main file that runs the server. It instantiates the other files as modules.
+It is also the hub for all the APIs.
+
+
+** listen.js **
+This file listens to the server for any changes.
+
+** routes.js **
+This file was create to be able to utilise routes if needed. No content has been added other
+then routes are started being logged.
+
+** Socket.js **
+This file runs sockets.io for the chat service that is functional within the
+angular application.
+
 ### Services
 The services that were used within the server are as follows;
 
@@ -32,32 +55,7 @@ The socket service handled information being sent and received from the server t
 ** User Service **
 The user service is responsible for CRUD actions to user APIs.
 
-
-## Angular Architecture
-### Server Summary
-The server files are spread mainly between 4 main files:
-* server.js
-* socket.js
-* listen.js
-* routes.js
-
-### Server.js
-This file is the main file that runs the server. It instantiates the other files as modules.
-It is also the hub for all the APIs.
-
-
-### listen.js
-This file listens to the server for any changes.
-
-### routes.js
-This file was create to be able to utilise routes if needed. No content has been added other
-then routes are started being logged.
-
-### Socket.js
-This file runs sockets.io for the chat service that is functional within the
-angular application.
-
-### APIs
+## REST APIs
 The node server has a number of API's that the angular application utilises.
 
 #### login
