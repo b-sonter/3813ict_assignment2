@@ -179,4 +179,4 @@ app.post('/api/groups', (req, res) => {
 
 
 //lsiten to server
-app.listen(3000, () => console.log('Chat server running on port 3000!'));
+//app.listen(3000, () => console.log('Chat server running on port 3000!'));

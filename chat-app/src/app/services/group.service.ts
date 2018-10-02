@@ -42,3 +42,5 @@ export class GroupService {
   //get all groups for specified user
   return this.http.post('http://localhost:3000/api/groups');
 }
+
+}

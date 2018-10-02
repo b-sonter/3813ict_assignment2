@@ -1,0 +1,13 @@
+input{
+  width: 80%;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+#space{
+  width: 2%;
+}
