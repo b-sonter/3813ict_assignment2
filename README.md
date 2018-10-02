@@ -21,38 +21,38 @@ The server files are spread mainly between 4 main files:
 * listen.js
 * routes.js
 
-** Server.js **
+**Server.js**
 This file is the main file that runs the server. It instantiates the other files as modules.
 It is also the hub for all the APIs.
 
 
-** listen.js **
+**listen.js**
 This file listens to the server for any changes.
 
-** routes.js **
+**routes.js**
 This file was create to be able to utilise routes if needed. No content has been added other
 then routes are started being logged.
 
-** Socket.js **
+**Socket.js**
 This file runs sockets.io for the chat service that is functional within the
 angular application.
 
 ### Services
 The services that were used within the server are as follows;
 
-** Authenticator Service **
+**Authenticator Service**
 The authenticator service is responsible for CRUD actions to the login APIs.
 
-** Group Service **
+**Group Service**
 The group service is responsible for CRUD actions to group APIs.
 
-** Image Upload Service **
+**Image Upload Service**
 The Image upload service is responsible for CRUD actions to image upload APIs.
 
-** Socket Service **
+**Socket Service**
 The socket service handled information being sent and received from the server to the client from the socket.io server.
 
-** User Service **
+**User Service**
 The user service is responsible for CRUD actions to user APIs.
 
 ## REST APIs
