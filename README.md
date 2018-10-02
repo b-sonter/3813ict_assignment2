@@ -1,9 +1,36 @@
 # 3813ict Assignment 2
 
 ## Git
-The layout of my GIT repository is simply a private single branch repository. The approach I took for my version control was only commiting when I was happy with a newly implemented piece of code. If I got muddled up in trying to implement another feature I simply scrapped that part of code and redownloaded my previously commited code.
+The layout of my GIT repository is simply a private single branch repository. The approach I took for my version control was only committing when I was happy with a newly implemented piece of code. If I got muddled up in trying to implement another feature I simply scrapped that part of code and redownloaded my previously committed code.
 
 ## Data Structures
+My data structures were broken down into 2 main different groups. The client side and server side. The different groups of users were represented in the client side, each given slightly different dashboards. These different users were the General Users, Admins and Super Admins.
+
+The components within this application consisted of the following;
+* channels
+* chat
+* create
+* delete
+* home
+* login
+
+### Services
+The services that were used within the server are as follows;
+
+** Authenticator Service **
+The authenticator service is responsible for CRUD actions to the login APIs.
+
+** Group Service **
+The group service is responsible for CRUD actions to group APIs.
+
+** Image Upload Service **
+The Image upload service is responsible for CRUD actions to image upload APIs.
+
+** Socket Service **
+The socket service handled information being sent and received from the server to the client from the socket.io server.
+
+** User Service **
+The user service is responsible for CRUD actions to user APIs.
 
 
 ## Angular Architecture
@@ -49,4 +76,4 @@ The node server has a number of API's that the angular application utilises.
 [POST]host/api/groups: This API sends a datastructure of all group data available to the application.
 
 #### Images
-[POST]host/api/upload: This API creates a path for images to be uploaded into the user images folder using formidable. 
+[POST]host/api/upload: This API creates a path for images to be uploaded into the user images folder using formidable.
