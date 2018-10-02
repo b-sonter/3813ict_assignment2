@@ -1,9 +1,9 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Main server javascript file
 //
+//Takes care of all the back end server API's
 //
-//
-//
+//Opens up and utilies a Mongodb - in this app 'chatDb'
 //
 //
 ///////////////////////////////////////////////////////////////////////////////
@@ -13,6 +13,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost/chatDb';
+const formidable = require("formidable");
 
 //for sockets
 const path = require('path');
@@ -167,6 +168,25 @@ app.post('/api/groups', (req, res) => {
     });
 })
 
+//uploadimage
+app.post('/api/upload', (req, res) => {
+  var form = new formidable.IncomingForm({ uploadDir: './userimages'});
+  form.keepExtensions = true;
 
-//lsiten to server
-//app.listen(3000, () => console.log('Chat server running on port 3000!'));
+  form.on('error', function(err){
+    throw err;
+  })
+
+  form.on('fileBegin', function(name, file){
+    file.path = form.uploadDir + "/" + file.name;
+  })
+
+  form.on('file', function(field, file){
+    res.send({
+      result: 'OK',
+      data:{"filename":file.name, "size": file.size},
+      numberOfImages:1,
+      message:"upload successful"
+    })
+  })
+})

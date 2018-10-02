@@ -1,3 +1,9 @@
+//////////////////////////////////////////////////////////////////////////////
+//
+// functions to delete a user from the database
+//
+/////////////////////////////////////////////////////////////////////////////
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../services/user.model';
@@ -31,19 +37,23 @@ export class CreateComponent implements OnInit {
     }
   }
 
+  //logout of session - go back to login page
   logout(){
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }
 
+  //go to delete a user - route to component
   goDelete(){
     this.router.navigate(['/delete']);
   }
 
+  //go to home page - route to dashboard
   goHome(){
     this.router.navigate(['/home']);
   }
 
+  //adds a new user
   addNewUser(new_username, new_password, new_permissions){
     //add new user to database
     let newuser = {
@@ -51,8 +61,10 @@ export class CreateComponent implements OnInit {
     password: new_password,
     permissions: new_permissions
   }
+  //log new user info
   console.log(newuser)
 
+  //send new user data to database
   this._userService.getUsers(this.user).subscribe(result => {
     console.log('result is ', result);
     if(result['success']){

@@ -1,3 +1,5 @@
+//model for a user to collect different components
+
 export class User {
 	constructor(){
 		this.username = '';
