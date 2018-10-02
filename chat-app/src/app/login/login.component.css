@@ -1,0 +1,17 @@
+body{
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 2em;
+
+
+  background-color: #CCE5FE;
+}
+
+#spacing{
+  padding: 2em;
+  background-color: #CCE5FE;
+}
+
+h1{
+  text-align: center;
+}

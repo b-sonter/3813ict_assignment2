@@ -12,7 +12,8 @@ export class HomeComponent implements OnInit {
   public permslog;
   public selectedGroup;
   public selectedChannel;
-  public groups = [];
+
+  public groups;
   public channels = [];
   public newGroupName:String
 
@@ -29,6 +30,9 @@ export class HomeComponent implements OnInit {
       //log the user permissions in sessionStorage
       let permslog = sessionStorage.getItem('permslog');
       this.permslog = permslog;
+
+      this.getGroups();
+
     }
   }
 
@@ -59,7 +63,12 @@ export class HomeComponent implements OnInit {
 
   //get list of groups from database
   getGroups(){
-    
+    this._groupService.getGroups().subscribe(
+      data =>{this.groups = data},
+      err => console.error(err),
+      () => console.log('done loading groups'),
+      console.log(this.groups)
+    );
   }
 
   //determine which group is currently open

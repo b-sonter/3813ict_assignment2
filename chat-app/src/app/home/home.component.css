@@ -3,6 +3,11 @@ body{
   margin-right: 2em;
   margin-bottom: 2em;
   margin-top: 1em;
+  background-color: #CCE5FE;
+}
+
+h3{
+  background-color: #CCE5FE;
 }
 
 .row:after {
@@ -25,9 +30,9 @@ body{
 }
 
 #chatroom{
-  width: 50%;
+  /* width: 50%; */
+  width: 100%;
   background-color: #CCE5FE;
-  height: 35em;
 }
 
 #chatpeeps{

@@ -11,11 +11,21 @@ const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
 
+class Group {
+  constructor(){
+    this.name = '';
+    this.admins = [];
+    this.members = [];
+  }
+  public name;
+  public admins;
+  public members;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class GroupService {
-  private api:string = 'http://localhost:3000/api/';
 
   constructor(private http:HttpClient) {}
 
@@ -28,8 +38,7 @@ export class GroupService {
   }
 
 
-  getGroups(data){
+  getGroups(Group){
   //get all groups for specified user
-  }
-
+  return this.http.post('http://localhost:3000/api/groups');
 }

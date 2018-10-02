@@ -132,7 +132,7 @@ app.post('/api/checkfordelete', (req, res) => {
 });
 
 //delete user from database
-app.post('/api/deleteuser', (req, res) => {
+app.delete('/api/deleteuser', (req, res) => {
   MongoClient.connect(url, function(err, db){
     if(err) throw err;
 
@@ -150,6 +150,23 @@ app.post('/api/deleteuser', (req, res) => {
   })
   console.log("Deleted user: " + req.body.username);
 });
+
+
+//get group data from database
+app.post('/api/groups', (req, res) => {
+    MongoClient.connect(url, function(err, db){
+      if(err) throw err;
+
+      //search for user in the database based on input to login
+      let dbo = db.db('chatDb');
+      dbo.collection("groups").find({}).toArray(function(err, result) {
+        if(err) throw err;
+        res.send(result);
+        console.log(result);
+        db.close();
+      })
+    });
+})
 
 
 //lsiten to server
