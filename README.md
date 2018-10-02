@@ -6,6 +6,7 @@ The layout of my GIT repository is simply a private single branch repository. Th
 ## Data Structures
 My data structures were broken down into 2 main different groups. The client side and server side. The different groups of users were represented in the client side, each given slightly different dashboards. These different users were the General Users, Admins and Super Admins.
 
+### Client Side Summary
 The components within this application consisted of the following;
 * channels
 * chat
@@ -25,7 +26,6 @@ The server files are spread mainly between 4 main files:
 This file is the main file that runs the server. It instantiates the other files as modules.
 It is also the hub for all the APIs.
 
-
 **listen.js**
 This file listens to the server for any changes.
 
@@ -37,6 +37,7 @@ then routes are started being logged.
 This file runs sockets.io for the chat service that is functional within the
 angular application.
 
+## Angular Architecture
 ### Services
 The services that were used within the server are as follows;
 
