@@ -103,7 +103,7 @@ app.post('/api/newuserwrite', (req, res) => {
       let newUser = {
         "username": req.body.username,
         "password": req.body.password,
-        "permissions": req.permissions
+        "permissions": req.body.permissions
       }
       let dbo = db.db('chatDb');
       dbo.collection('user').insertOne(newUser, function(err, data){
@@ -122,19 +122,10 @@ app.post('/api/checkfordelete', (req, res) => {
     if(err) throw err;
 
     let dbo = db.db('chatDb');
-    let query = {"username": req.body.username};
+    dbo.collection("user").find({}).toArray(function(err, result){
+      if(err) throw err;
 
-    dbo.collection('user').findOne(query, function(err, data){
-      let response = {};
-      if(data == null){
-        response.success = false;
-        console.log("Null");
-      } else {
-        response.success = true;
-        console.log("Username can be deleted");
-      }
-      res.send(response);
-
+      res.send(result);
       db.close();
     })
   })
@@ -146,9 +137,8 @@ app.delete('/api/deleteuser', (req, res) => {
     if(err) throw err;
 
     let dbo = db.db('chatDb');
-    let ObjectID = require('mongodb').ObjectID;
 
-    let query = {_id: ObjectID(id)};
+    let query = {"username": req.body.username};
     console.log(query._id)
     dbo.collection('user').deleteOne(query, function(err, data){
       if(err) throw err;

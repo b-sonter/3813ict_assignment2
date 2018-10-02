@@ -15,12 +15,9 @@ export class UserService {
   constructor(private http: HttpClient) { }
 
   getUsers(user: User){
-    return this.http.post('http://localhost:3000/api/newuser',{
-      username : user.username,
-      password : user.password,
-      permissions: user.permissions
-      });
+    return this.http.post('http://localhost:3000/api/newuser')
   }
+
 
   addNewUser(newuser){
     let body = JSON.stringify(newuser);
@@ -28,13 +25,12 @@ export class UserService {
   }
 
   checkToDelete(user: User){
-    return this.http.post('http://localhost:3000/api/checkfordelete',{
-      username : user.username
-      });
+    return this.http.post('http://localhost:3000/api/checkfordelete')
   }
 
-  userDelete(goodbye){
-    return this.http.delete('http://localhost:3000/api/deleteuser', + user._id)
+  userDelete(username){
+    return this.http.delete('http://localhost:3000/api/deleteuser'),{
+			username : user.username
   }
 
 }

@@ -27,6 +27,8 @@ export class DeleteComponent implements OnInit {
       this.userlog = userlog;
       let permslog = sessionStorage.getItem('permslog');
       this.permslog = permslog;
+
+      this.getUsers();
     }
   }
 
@@ -43,21 +45,25 @@ export class DeleteComponent implements OnInit {
     this.router.navigate(['/create']);
   }
 
+  getUsers(){
+    this._userService.checkToDelete().subscribe(
+      data => {this.user = data},
+      err => console.error(err),
+      () => console.log('done loading students')
+    );
+  }
+
   deleteUser(username){
     //delete user from database
-    this._userService.checkToDelete(username).subscribe(result => {
-    console.log('result is ', result);
-    if(result['success']){
-      this._userService.userDelete(username).subscribe(
-        data => {
-          return true;
-        },
-        error => {
-          console.log(error);
-        }
-      )
-    } else {
-      alert("Can't delete a user that doesn't exist");
+    console.log(username);
+    this._userService.userDelete(username).subscribe(
+    data => {
+      return true;
+    },
+    error => {
+      console.log('error deleting user');
+    }
+  )
     }
 
 });
