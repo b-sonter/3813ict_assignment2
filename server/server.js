@@ -14,6 +14,15 @@ const app = express()
 const MongoClient = require('mongodb').MongoClient;
 const url = 'mongodb://localhost/chatDb';
 
+//for sockets
+const path = require('path');
+const http = require('http').Server(app);
+const io = require('socket.io')(http);
+
+require('./routes.js')(app, path);
+require('./socket.js')(app, io);
+require('./listen.js')(http);
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended : false}))
 
